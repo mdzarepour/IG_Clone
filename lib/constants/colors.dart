@@ -8,3 +8,11 @@ class SolidColors {
   static const purple = Color(0xff4E3CC9);
   static const lightBlue = Color(0xff55B9F7);
 }
+
+class GradientColors {
+  static const LinearGradient registerBackGround = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [Color(0xFF323A99), Color(0xFFF98BFC)],
+  );
+}

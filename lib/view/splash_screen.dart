@@ -1,9 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:instagram/constants/colors.dart';
+import 'package:instagram/view/register_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 4)).then((value) {
+      Navigator.pushReplacement(
+        context,
+        CupertinoPageRoute(builder: (context) => RegisterScreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
