@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/constants/colors.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  FocusNode emailNode = FocusNode();
+  FocusNode passwordNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    emailNode.addListener(() {
+      setState(() {});
+    });
+    passwordNode.addListener(() {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +65,66 @@ class RegisterScreen extends StatelessWidget {
                 Image.asset('assets/images/moodinger.png'),
               ],
             ),
-            SizedBox(
-              height: size.height / 10,
-              width: size.width / 1.25,
-              child: TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.grey,
-                  filled: true,
+            TextField(
+              focusNode: emailNode,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 15,
+                ),
+                labelText: 'Password',
+                labelStyle: TextStyle(
+                  fontFamily: 'GM',
+                  fontSize: 20,
+                  color: emailNode.hasFocus ? Color(0xffF35383) : Colors.white,
+                ),
+              ),
+            ),
+            TextField(
+              focusNode: passwordNode,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 15,
+                ),
+                labelText: 'Email',
+                labelStyle: TextStyle(
+                  fontFamily: 'GM',
+                  fontSize: 20,
+                  color:
+                      passwordNode.hasFocus ? Color(0xffF35383) : Colors.white,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide(color: Color(0xffC5C5C5), width: 3.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide(width: 3, color: Color(0xffF35383)),
                 ),
               ),
             ),
           ],
         ),
+
+        // SizedBox(
+        //   height: size.height / 10,
+        //   width: size.width / 1.25,
+        //   child: TextField(
+        //     decoration: InputDecoration(
+        //       fillColor: Colors.grey,
+        //       filled: true,
+        //     ),
+        //   ),
+        // ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailNode.dispose();
+    passwordNode.dispose();
   }
 }
