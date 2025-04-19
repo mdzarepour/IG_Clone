@@ -12,8 +12,43 @@ class Instagram extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(textTheme: _getTextTheme()),
+      theme: ThemeData(
+        textTheme: _getTextTheme(),
+        inputDecorationTheme: _getInputTheme(),
+        textButtonTheme: _getTextButtonTheme(),
+      ),
       home: SplashScreen(),
+    );
+  }
+
+  TextButtonThemeData _getTextButtonTheme() {
+    return TextButtonThemeData(
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        backgroundColor: SolidColors.pink,
+        fixedSize: Size(129, 46),
+      ),
+    );
+  }
+
+  InputDecorationTheme _getInputTheme() {
+    return InputDecorationTheme(
+      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderSide: BorderSide(width: 2, color: SolidColors.white),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderSide: BorderSide(width: 2, color: SolidColors.pink),
+      ),
+
+      labelStyle: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        fontFamily: 'GM',
+        color: SolidColors.white,
+      ),
     );
   }
 
