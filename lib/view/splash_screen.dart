@@ -35,7 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
           color: SolidColors.darkBlue,
           image: DecorationImage(
             repeat: ImageRepeat.repeat,
-
             image: AssetImage('assets/images/splash_pattern.png'),
           ),
         ),
@@ -43,7 +42,10 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: SvgPicture.asset('assets/svg/logo.svg', height: 50),
+              child: SvgPicture.asset(
+                'assets/svg/logo.svg',
+                height: size.height / 12,
+              ),
             ),
             Column(
               children: [
