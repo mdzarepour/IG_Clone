@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/colors.dart';
 import 'package:instagram/view/splash_screen.dart';
+import 'package:instagram/view/switch_account_screen.dart';
 
 void main(List<String> args) {
   runApp(Instagram());
@@ -13,11 +14,12 @@ class Instagram extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.transparent,
         textTheme: _getTextTheme(),
         inputDecorationTheme: _getInputTheme(),
         textButtonTheme: _getTextButtonTheme(),
       ),
-      home: SplashScreen(),
+      home: SwitchAccountScreen(),
     );
   }
 

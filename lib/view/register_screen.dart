@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/colors.dart';
+import 'package:instagram/constants/widgets/sign_up_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -7,6 +8,7 @@ class RegisterScreen extends StatefulWidget {
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
+//TODO create form for obttom section screen --->
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final FocusNode _emailNode = FocusNode();
@@ -47,20 +49,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Positioned(
       bottom: 0,
       width: size.width,
-      height: size.height / 2,
+      height: MediaQuery.of(context).size.height * 0.5, // Responsive height
       child: Container(
         decoration: BoxDecoration(
           color: SolidColors.darkBlue,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
         ),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             _buildHeader(textTheme),
-            SizedBox(height: size.height / 25.72),
             SizedBox(
-              height: size.height / 20,
-              width: size.width / 1.2,
+              height: MediaQuery.of(context).size.height * 0.039,
+            ), // Responsive spacing
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+              width: MediaQuery.of(context).size.width * 0.83,
               child: TextField(
                 focusNode: _emailNode,
                 style: textTheme.headlineSmall,
@@ -76,44 +80,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            SizedBox(height: size.height / 28.93),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.034),
             SizedBox(
-              height: size.height / 20,
-              width: size.width / 1.2,
+              height: MediaQuery.of(context).size.height * 0.05,
+              width: MediaQuery.of(context).size.width * 0.83,
               child: TextField(
                 obscureText: true,
                 focusNode: _passwordNode,
                 style: textTheme.headlineSmall,
                 cursorColor: SolidColors.white,
+                keyboardType: TextInputType.emailAddress,
                 textAlignVertical: TextAlignVertical.center,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(
+                  labelStyle:
+                      _passwordNode.hasFocus
+                          ? textTheme.headlineMedium
+                          : textTheme.headlineSmall,
+                  labelText: 'Password',
+                ),
               ),
             ),
-            SizedBox(height: size.height / 28.93),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.034),
             TextButton(
               onPressed: () {},
-              child: Text(style: textTheme.titleLarge, 'Sign in'),
+              child: Text('Sign in', style: textTheme.titleLarge),
             ),
-            SizedBox(height: size.height / 18.58),
-            _buildSignUp(textTheme),
-            SizedBox(height: size.height / 11.87),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.054),
+            SignUpWidget(),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.084),
           ],
         ),
       ),
-    );
-  }
-
-  Row _buildSignUp(TextTheme textTheme) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(style: textTheme.titleMedium, 'Don\'t have an account  / '),
-        InkWell(
-          onTap: () {},
-          child: Text(style: textTheme.titleLarge, 'Sign up'),
-        ),
-      ],
     );
   }
 

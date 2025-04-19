@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 4)).then((value) {
+    Future.delayed(Duration(seconds: 3)).then((value) {
       Navigator.pushReplacement(
         context,
         CupertinoPageRoute(builder: (context) => RegisterScreen()),
@@ -28,7 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
     TextTheme textTheme = Theme.of(context).textTheme;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.transparent,
       body: Container(
         width: size.width,
         decoration: BoxDecoration(
@@ -44,16 +43,18 @@ class _SplashScreenState extends State<SplashScreen> {
             Expanded(
               child: SvgPicture.asset(
                 'assets/svg/logo.svg',
-                height: size.height / 12,
+                height:
+                    MediaQuery.of(context).size.height *
+                    0.083, // Responsive height
               ),
             ),
             Column(
               children: [
-                Text(style: textTheme.displaySmall, 'From'),
-                Text(style: textTheme.titleSmall, 'ExpertFlutter'),
+                Text('From', style: textTheme.displaySmall),
+                Text('ExpertFlutter', style: textTheme.titleSmall),
               ],
             ),
-            SizedBox(height: 47),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.051),
           ],
         ),
       ),

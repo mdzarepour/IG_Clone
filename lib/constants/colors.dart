@@ -15,4 +15,12 @@ class GradientColors {
     end: Alignment.bottomCenter,
     colors: [Color(0xFF323A99), Color(0xFFF98BFC)],
   );
+  static const LinearGradient frostedContainer = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color.fromARGB(122, 255, 255, 255),
+      Color.fromARGB(55, 255, 255, 255),
+    ],
+  );
 }
