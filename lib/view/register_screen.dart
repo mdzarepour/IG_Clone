@@ -9,27 +9,22 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  FocusNode emailNode = FocusNode();
-  FocusNode passwordNode = FocusNode();
+  final FocusNode _emailNode = FocusNode();
+  final FocusNode _passwordNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    emailNode.addListener(() {
-      setState(() {});
-    });
-    passwordNode.addListener(() {
-      setState(() {});
-    });
+    _emailNode.addListener(() => setState(() {}));
+    _passwordNode.addListener(() => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children: [_buildTopHalf(), _buildBottomHalf(size, textTheme)],
+      body: GestureDetector(
+        onTap: () => [_emailNode.unfocus(), _passwordNode.unfocus()],
+        child: Stack(children: [_buildTopHalf(), _buildBottomHalf()]),
       ),
     );
   }
@@ -46,7 +41,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Positioned _buildBottomHalf(Size size, TextTheme textThme) {
+  Positioned _buildBottomHalf() {
+    TextTheme textTheme = Theme.of(context).textTheme;
+    Size size = MediaQuery.of(context).size;
     return Positioned(
       bottom: 0,
       width: size.width,
@@ -58,73 +55,83 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(style: textThme.headlineLarge, 'Sign in to'),
-                Image.asset('assets/images/moodinger.png'),
-              ],
-            ),
-            TextField(
-              focusNode: emailNode,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 15,
-                ),
-                labelText: 'Password',
-                labelStyle: TextStyle(
-                  fontFamily: 'GM',
-                  fontSize: 20,
-                  color: emailNode.hasFocus ? Color(0xffF35383) : Colors.white,
-                ),
-              ),
-            ),
-            TextField(
-              focusNode: passwordNode,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 15,
-                ),
-                labelText: 'Email',
-                labelStyle: TextStyle(
-                  fontFamily: 'GM',
-                  fontSize: 20,
-                  color:
-                      passwordNode.hasFocus ? Color(0xffF35383) : Colors.white,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  borderSide: BorderSide(color: Color(0xffC5C5C5), width: 3.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  borderSide: BorderSide(width: 3, color: Color(0xffF35383)),
+            Spacer(),
+            _buildHeader(textTheme),
+            SizedBox(height: size.height / 25.72),
+            SizedBox(
+              height: size.height / 20,
+              width: size.width / 1.2,
+              child: TextField(
+                focusNode: _emailNode,
+                style: textTheme.headlineSmall,
+                cursorColor: SolidColors.white,
+                keyboardType: TextInputType.emailAddress,
+                textAlignVertical: TextAlignVertical.center,
+                decoration: InputDecoration(
+                  labelStyle:
+                      _emailNode.hasFocus
+                          ? textTheme.headlineMedium
+                          : textTheme.headlineSmall,
+                  labelText: 'Email',
                 ),
               ),
             ),
+            SizedBox(height: size.height / 28.93),
+            SizedBox(
+              height: size.height / 20,
+              width: size.width / 1.2,
+              child: TextField(
+                obscureText: true,
+                focusNode: _passwordNode,
+                style: textTheme.headlineSmall,
+                cursorColor: SolidColors.white,
+                textAlignVertical: TextAlignVertical.center,
+                keyboardType: TextInputType.visiblePassword,
+                decoration: InputDecoration(labelText: 'Password'),
+              ),
+            ),
+            SizedBox(height: size.height / 28.93),
+            TextButton(
+              onPressed: () {},
+              child: Text(style: textTheme.titleLarge, 'Sign in'),
+            ),
+            SizedBox(height: size.height / 18.58),
+            _buildSignUp(textTheme),
+            SizedBox(height: size.height / 11.87),
           ],
         ),
-
-        // SizedBox(
-        //   height: size.height / 10,
-        //   width: size.width / 1.25,
-        //   child: TextField(
-        //     decoration: InputDecoration(
-        //       fillColor: Colors.grey,
-        //       filled: true,
-        //     ),
-        //   ),
-        // ),
       ),
+    );
+  }
+
+  Row _buildSignUp(TextTheme textTheme) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(style: textTheme.titleMedium, 'Don\'t have an account  / '),
+        InkWell(
+          onTap: () {},
+          child: Text(style: textTheme.titleLarge, 'Sign up'),
+        ),
+      ],
+    );
+  }
+
+  Row _buildHeader(TextTheme textThme) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 5,
+      children: [
+        Text(style: textThme.headlineLarge, 'Sign in to'),
+        Image.asset('assets/images/moodinger.png'),
+      ],
     );
   }
 
   @override
   void dispose() {
     super.dispose();
-    emailNode.dispose();
-    passwordNode.dispose();
+    _emailNode.dispose();
+    _passwordNode.dispose();
   }
 }
